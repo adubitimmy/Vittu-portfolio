@@ -1187,7 +1187,15 @@ body {
 
 @media (max-width: 768px) {
   .gallery-header {
-    padding: 0 2rem;
+    padding: 0 1.25rem;
+  }
+  .gallery-logo {
+    font-size: 1.1rem;
+    white-space: nowrap; /* Prevent brand name from wrapping on mobile */
+    letter-spacing: -0.03em;
+  }
+  .nav-link-btn.highlight-link {
+    display: none; /* Hide Virtual Gallery button from mobile header */
   }
 }
 
