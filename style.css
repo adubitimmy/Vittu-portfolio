@@ -99,7 +99,7 @@ body.gallery-theme {
   overflow-x: auto;
   scrollbar-width: none; /* Hide scrollbars for Firefox */
   position: relative;
-  z-index: 10;
+  z-index: 5; /* Rendered below the shelf ledge to hide shadows behind it */
   cursor: grab;
 }
 
@@ -123,7 +123,8 @@ body.gallery-theme {
     0 2px 2px rgba(0,0,0,0.04), 
     inset 0 -2px 2px rgba(0, 0, 0, 0.05);
   position: relative;
-  z-index: 5;
+  z-index: 10; /* Rendered above artwork-row so card shadows fall behind */
+  pointer-events: none; /* Allows clicks and drags to pass through to cards behind */
   margin-top: -1rem; /* Aligns top of ledge exactly to card bottoms */
 }
 
