@@ -192,29 +192,25 @@ function openArtworkModal(index, cardElement) {
   const startX = cardRect.left + (cardRect.width / 2) - (wrapperRect.left + (wrapperRect.width / 2));
   const startY = cardRect.top + (cardRect.height / 2) - (wrapperRect.top + (wrapperRect.height / 2));
 
-  // Set flight start bounds on modal wrapper
+  // Set flight start bounds on modal wrapper (pure scale and position growth, no spin)
   gsap.set(modalWrapper, {
     x: startX,
     y: startY,
     scaleX: cardRect.width / wrapperRect.width,
     scaleY: cardRect.height / wrapperRect.height,
-    rotationY: -180, // spin on flight entry
-    rotationZ: -10,
     opacity: 0.8
   });
 
-  // Run flight to center
+  // Run flight to center (smooth ease-in-and-out scale transition)
   gsap.to(modalWrapper, {
     x: 0,
     y: 0,
     scaleX: 1,
     scaleY: 1,
-    rotationY: 0,
-    rotationZ: 0,
     opacity: 1,
-    duration: 0.8,
-    ease: 'power4.out',
-    clearProps: 'transform,rotationY,rotationZ'
+    duration: 0.7,
+    ease: 'power3.inOut',
+    clearProps: 'transform'
   });
 
   // Fade backdrop
