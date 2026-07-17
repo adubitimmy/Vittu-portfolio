@@ -716,7 +716,7 @@ body {
 /* Shared Background Wrapper for Hero & Info Section Blending */
 .hero-info-wrapper {
   position: relative;
-  background-image: url('/assets/background.jpg');
+  background-image: url('assets/background.jpg');
   background-size: cover;
   background-position: top center;
   background-repeat: no-repeat;

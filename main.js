@@ -1,6 +1,30 @@
 import { gsap } from 'gsap';
 import artworksData from './artworks.json';
 
+// Eagerly glob all available MP4/WebM hover videos in public/assets/videos
+const videoModules = import.meta.glob('./public/assets/videos/*.{mp4,webm}', { eager: true, query: '?url' });
+
+// Helper to extract base name from a path
+function getBaseName(path) {
+  if (!path) return '';
+  const parts = path.split('/');
+  const filename = parts[parts.length - 1];
+  return filename.substring(0, filename.lastIndexOf('.'));
+}
+
+// Find matching video URL if it exists in the globbed modules
+function getMatchingVideoUrl(imagePath) {
+  const baseName = getBaseName(imagePath);
+  if (!baseName) return null;
+  
+  for (const globPath in videoModules) {
+    if (getBaseName(globPath) === baseName) {
+      return videoModules[globPath].default || videoModules[globPath];
+    }
+  }
+  return null;
+}
+
 // DOM Elements
 const rowShelf1 = document.getElementById('row-shelf-1');
 const rowShelf2 = document.getElementById('row-shelf-2');
@@ -83,6 +107,7 @@ function createArtworkCard(artwork, index) {
   `;
 
   setupCardInteractions(card);
+  setupCardVideoHover(card, artwork.image);
   return card;
 }
 
@@ -118,6 +143,76 @@ function setupCardInteractions(card) {
       openArtworkModal(index, card);
     }
   });
+}
+
+// 2b. Static-first Hover/Tap Video Swap Interaction
+function setupCardVideoHover(card, imageUrl) {
+  const videoUrl = getMatchingVideoUrl(imageUrl);
+  if (!videoUrl) return;
+
+  const canvasBox = card.querySelector('.card-canvas-box') || card.querySelector('.grid-card-inner');
+  if (!canvasBox) return;
+
+  let videoEl = null;
+
+  const startVideo = () => {
+    if (!videoEl) {
+      videoEl = document.createElement('video');
+      videoEl.src = videoUrl;
+      videoEl.muted = true;
+      videoEl.loop = true;
+      videoEl.playsInline = true;
+      videoEl.style.position = 'absolute';
+      videoEl.style.top = '0';
+      videoEl.style.left = '0';
+      videoEl.style.width = '100%';
+      videoEl.style.height = '100%';
+      videoEl.style.objectFit = 'cover';
+      videoEl.style.zIndex = '1'; /* Above img (z-index 0) but below overlays */
+      videoEl.style.opacity = '0';
+      videoEl.style.transition = 'opacity 0.3s ease';
+      
+      videoEl.oncanplay = () => {
+        if (videoEl) {
+          videoEl.play().then(() => {
+            videoEl.style.opacity = '1';
+          }).catch(err => console.log('Video play auto-blocked:', err));
+        }
+      };
+
+      videoEl.onerror = () => {
+        if (videoEl) {
+          videoEl.remove();
+          videoEl = null;
+        }
+      };
+
+      // Insert as first child so it sits underneath card sheen and metadata overlays
+      canvasBox.insertBefore(videoEl, canvasBox.firstChild);
+    } else {
+      videoEl.play().then(() => {
+        videoEl.style.opacity = '1';
+      }).catch(err => console.log('Video play auto-blocked:', err));
+    }
+  };
+
+  const stopVideo = () => {
+    if (videoEl) {
+      videoEl.style.opacity = '0';
+      setTimeout(() => {
+        if (videoEl && videoEl.style.opacity === '0') {
+          videoEl.pause();
+        }
+      }, 300);
+    }
+  };
+
+  card.addEventListener('mouseenter', startVideo);
+  card.addEventListener('mouseleave', stopVideo);
+
+  // Touch device support
+  card.addEventListener('touchstart', startVideo, { passive: true });
+  card.addEventListener('touchend', stopVideo, { passive: true });
 }
 
 // 3. Horizontal Inertia Sway & Scroll Lag
