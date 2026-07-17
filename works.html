@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Samuel Vittu | Virtual Gallery</title>
-  <meta name="description" content="A minimal virtual gallery showcasing the oil paintings and international exhibitions of Samuel Vittu. Inspired by premium editorial design.">
+  <title>Samuel Vittu | Works Collection</title>
+  <meta name="description" content="A comprehensive grid of oil paintings by Samuel Vittu. View authenticated paintings without frames.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Inter:wght@300;400;500;600&family=Caveat+Brush&family=Herr+Von+Muellerhoff&display=swap" rel="stylesheet">
@@ -13,7 +13,7 @@
 <body class="gallery-theme">
   <!-- Minimal Navigation Header -->
   <header class="gallery-header">
-    <div class="gallery-logo">Samuel Vittu</div>
+    <div class="gallery-logo"><a href="/" style="color: inherit; text-decoration: none;">Samuel Vittu</a></div>
     <nav class="gallery-nav">
       <a href="/classic.html" class="nav-link-btn highlight-link">Interactive Studio</a>
       <button class="nav-menu-btn" id="gallery-menu-trigger">
@@ -27,85 +27,31 @@
   <div id="gallery-full-menu" class="fullscreen-menu">
     <button class="close-menu-btn" id="close-gallery-menu">&times;</button>
     <nav class="menu-nav">
-      <a href="/" class="menu-link active">Gallery Home</a>
+      <a href="/" class="menu-link">Gallery Home</a>
       <a href="/classic.html" class="menu-link">Interactive Studio</a>
-      <a href="#" class="menu-link">Exhibitions</a>
+      <a href="/works.html" class="menu-link active">Exhibitions</a>
       <a href="#" class="menu-link">Biography</a>
       <a href="#" class="menu-link">Contact</a>
     </nav>
   </div>
 
-  <!-- Primary Gallery Viewport -->
-  <main class="gallery-viewport">
+  <!-- Primary Grid Viewport -->
+  <main class="gallery-viewport grid-page-viewport">
     
-    <!-- Top-Left Artist Statement / Intro -->
-    <div class="artist-intro">
-      <p class="intro-statement">
-        An ongoing record of works. <br>Exchanged across international borders.
-      </p>
+    <!-- Title Section -->
+    <div class="grid-header-section">
+      <h1 class="grid-page-title">Works Collection</h1>
+      <p class="grid-page-subtitle">Twenty-four authenticated paintings. Frameless and raw.</p>
     </div>
 
-    <!-- Shelves Container -->
-    <div class="shelves-container">
-      
-      <!-- Shelf 1 -->
-      <div class="gallery-shelf" id="shelf-1">
-        <div class="shelf-label">Focus Series</div>
-        <div class="artwork-row" id="row-shelf-1" role="list">
-          <!-- Dynamically populated cards -->
-        </div>
-        <div class="shelf-ledge"></div>
-      </div>
-
-      <!-- Shelf 2 -->
-      <div class="gallery-shelf" id="shelf-2">
-        <div class="shelf-label">Exhibition Highlights</div>
-        <div class="artwork-row" id="row-shelf-2" role="list">
-          <!-- Dynamically populated cards -->
-        </div>
-        <div class="shelf-ledge"></div>
-      </div>
-
-    </div>
-
-    <!-- Bottom Exhibition Timeline Strip -->
-    <div class="timeline-container">
-      <div class="timeline-label">Exhibitions</div>
-      <div class="timeline-strip">
-        <div class="timeline-item" data-target="blue-room">
-          <span class="timeline-year">2026</span>
-          <span class="timeline-city">London</span>
-        </div>
-        <div class="timeline-item" data-target="mercury-garden">
-          <span class="timeline-year">2025</span>
-          <span class="timeline-city">Lagos</span>
-        </div>
-        <div class="timeline-item" data-target="ritual-afternoon">
-          <span class="timeline-year">2025</span>
-          <span class="timeline-city">Paris</span>
-        </div>
-        <div class="timeline-item" data-target="velvet-shadows">
-          <span class="timeline-year">2024</span>
-          <span class="timeline-city">Berlin</span>
-        </div>
-        <div class="timeline-item" data-target="dream-forest">
-          <span class="timeline-year">2024</span>
-          <span class="timeline-city">Brussels</span>
-        </div>
-        <div class="timeline-item" data-target="terra-impasto">
-          <span class="timeline-year">2023</span>
-          <span class="timeline-city">Milan</span>
-        </div>
-        <div class="timeline-item" data-target="organic-silence">
-          <span class="timeline-year">2023</span>
-          <span class="timeline-city">New York</span>
-        </div>
-      </div>
+    <!-- The 4-Column Grid -->
+    <div class="works-grid-view" id="all-works-grid" role="list">
+      <!-- Dynamically loaded grid cards -->
     </div>
 
   </main>
 
-  <!-- Fly-to-Center Modal Overlay Portal -->
+  <!-- Fly-to-Center Modal Overlay Portal (Shared) -->
   <div id="gallery-modal" class="gallery-modal-overlay" role="dialog" aria-modal="true" aria-hidden="true">
     <div class="modal-backdrop"></div>
     
@@ -124,7 +70,7 @@
       <div class="modal-flip-card" id="modal-flip-card-element">
         <div class="flip-card-inner">
           
-          <!-- Card Front: The Gold-Framed Painting -->
+          <!-- Card Front: Unframed Painting (on this page we fly into the modal, which has the gold frame) -->
           <div class="flip-card-front">
             <div class="modal-canvas-frame">
               <img id="modal-artwork-img" src="" alt="Enlarged Artwork">
@@ -172,6 +118,6 @@
     </div>
   </div>
 
-  <script type="module" src="/main.js"></script>
+  <script type="module" src="/works.js"></script>
 </body>
 </html>
