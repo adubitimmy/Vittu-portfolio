@@ -237,7 +237,7 @@ flipCardElement.addEventListener('click', (e) => {
   flipCardInner.classList.toggle('flipped');
 });
 
-// Close Modal with Reverse Spin-back
+// Close modal by returning the artwork directly to its source card.
 function closeArtworkModal() {
   if (!activeGridCard) return;
 
@@ -255,8 +255,6 @@ function closeArtworkModal() {
       y: targetY,
       scaleX: cardRect.width / wrapperRect.width,
       scaleY: cardRect.height / wrapperRect.height,
-      rotationY: 180,
-      rotationZ: 10,
       opacity: 0.5,
       duration: 0.75,
       ease: 'power3.inOut',
