@@ -165,7 +165,7 @@ body.gallery-theme {
   scroll-snap-align: start;
 }
 
-/* Card inner element carrying gold frame & canvas details */
+/* Card inner element carrying realistic white frame & canvas details */
 .artwork-card-inner {
   width: 100%;
   height: 100%;
@@ -173,15 +173,14 @@ body.gallery-theme {
   padding: 8px; /* Mat border spacing */
   border: 12px solid;
   border-image: linear-gradient(135deg, 
-    #bf953f 0%, 
-    #fcf6ba 25%, 
-    #b38728 50%, 
-    #fbf5b7 75%, 
-    #aa771c 100%
+    #d8d8d0 0%, 
+    #e8e8e2 40%, 
+    #ffffff 100%
   ) 12;
   /* Crisper, harder contact shadow cast left/bottom-left (light from right) */
   box-shadow: 
     -5px 7px 5px rgba(0, 0, 0, 0.38),
+    inset 0 0 0 1px rgba(0, 0, 0, 0.2), /* Inner bevel lip line where frame meets mat */
     inset 0 0 10px rgba(0,0,0,0.6);
   display: flex;
   flex-direction: column;
@@ -197,6 +196,7 @@ body.gallery-theme {
   .artwork-card:hover .artwork-card-inner {
     box-shadow: 
       -16px 24px 14px rgba(0, 0, 0, 0.42),
+      inset 0 0 0 1px rgba(0, 0, 0, 0.2),
       inset 0 0 10px rgba(0,0,0,0.6);
   }
 }
@@ -851,15 +851,14 @@ body.gallery-theme {
   background: #1e1b15; /* Charcoal gold velvet */
   border: 12px solid;
   border-image: linear-gradient(135deg, 
-    #bf953f 0%, 
-    #fcf6ba 25%, 
-    #b38728 50%, 
-    #fbf5b7 75%, 
-    #aa771c 100%
+    #d8d8d0 0%, 
+    #e8e8e2 40%, 
+    #ffffff 100%
   ) 12;
   /* Contact shadow cast left/bottom-left (light from right) */
   box-shadow: 
     -6px 8px 12px rgba(0, 0, 0, 0.25),
+    inset 0 0 0 1px rgba(0, 0, 0, 0.2), /* Inner bevel lip line */
     inset 0 0 15px rgba(0,0,0,0.8);
   display: flex;
   flex-direction: column;
@@ -879,6 +878,7 @@ body.gallery-theme {
   .view-more-card:hover .view-more-card-inner {
     box-shadow: 
       -18px 28px 36px rgba(0, 0, 0, 0.3),
+      inset 0 0 0 1px rgba(0, 0, 0, 0.2),
       inset 0 0 15px rgba(0,0,0,0.8);
     background: #28241b;
   }
