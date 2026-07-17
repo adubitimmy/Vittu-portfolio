@@ -532,34 +532,31 @@ body {
   align-items: center;
   justify-content: center;
   width: 100%;
-  min-height: calc(100vh - 140px); /* Leave room for tray */
-  padding: 100px 2rem 160px 2rem;
+  height: calc(100vh - 140px); /* Leave room for bottom tray */
+  padding: 80px 2rem 20px 2rem;
   position: relative;
   z-index: 5;
+  overflow: hidden;
 }
 
-/* Canvas Control Bar */
+/* Canvas Control Bar (Decoupled, transparent wrapper) */
 .canvas-control-bar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 800px; /* Wider landscape layout */
+  width: 800px;
   max-width: 90vw;
-  background: rgba(248, 247, 244, 0.85); /* light theme overlay */
-  backdrop-filter: blur(8px);
-  border-radius: 8px 8px 0 0;
-  padding: 0.75rem 1.5rem;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-  border-top: 1px solid rgba(0, 0, 0, 0.08);
-  border-left: 1px solid rgba(0, 0, 0, 0.08);
-  border-right: 1px solid rgba(0, 0, 0, 0.08);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  background: transparent; /* No shared background container */
+  backdrop-filter: none;
+  box-shadow: none;
+  border: none;
+  padding: 0.75rem 0;
   z-index: 10;
 }
 
 .canvas-controls-left {
   display: flex;
-  gap: 0.8rem;
+  gap: 1rem; /* Spaced out independent buttons */
 }
 
 .canvas-controls-right {
@@ -569,8 +566,8 @@ body {
 }
 
 .ctrl-btn {
-  background: transparent;
-  border: 1px solid #1a1a1a;
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.12);
   color: #1a1a1a;
   font-family: var(--font-body);
   font-size: 0.75rem;
@@ -581,12 +578,14 @@ body {
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   text-transform: uppercase;
   letter-spacing: 0.05em;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 }
 
 .ctrl-btn:hover {
   background: #1a1a1a;
   color: #f8f7f4;
   border-color: #1a1a1a;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .highlight-ctrl-btn {
@@ -596,9 +595,9 @@ body {
 }
 
 .highlight-ctrl-btn:hover {
-  background: transparent;
+  background: #ffffff;
   color: #1a1a1a;
-  border-color: #1a1a1a;
+  border-color: rgba(0, 0, 0, 0.12);
 }
 
 .brush-size-control {
@@ -643,41 +642,45 @@ body {
   font-weight: 700;
 }
 
-/* Clipboard Container (Centerpiece - Landscape Orientation) */
+/* Clipboard Container (Centerpiece - Landscape Orientation constrained by screen height) */
 .clipboard-container {
   position: relative;
-  width: 800px;
+  height: 52vh; /* Constrain vertical height for perfect screen fit */
+  max-height: 52vh;
+  aspect-ratio: 4 / 3; /* Landscape drawing board */
+  width: auto;
   max-width: 90vw;
-  aspect-ratio: 4 / 3; /* Wider than tall landscape canvas */
   display: flex;
   flex-direction: column;
   align-items: center;
   background: transparent;
-  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.12);
-  border-radius: 0 0 8px 8px;
 }
 
 .clipboard-base {
-  width: 100%;
-  height: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  /* Swapped dimensions to align with rotated image aspect ratio */
+  width: calc(100% * 3 / 4);
+  height: calc(100% * 4 / 3);
+  transform: translate(-50%, -50%) rotate(-90deg); /* Sideways clipboard rotation (clip on left) */
   object-fit: fill;
-  filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.22));
+  filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.15));
   pointer-events: none;
-  border-radius: 0 0 8px 8px;
 }
 
-/* Canvas Sheet */
+/* Canvas Sheet (Positioned nicely next to the left-side metal clip) */
 .canvas-paper {
   position: absolute;
   top: 7.2%;
   bottom: 8.5%;
-  left: 14%;
-  right: 14%;
+  left: 15%; /* Offsets canvas to the right of the left-oriented clip */
+  right: 7%;
   background: #ffffff;
   border-radius: 4px;
   box-shadow: 
-    inset 0 0 15px rgba(0, 0, 0, 0.06),
-    0 2px 4px rgba(0, 0, 0, 0.08);
+    inset 0 0 15px rgba(0, 0, 0, 0.05),
+    0 2px 4px rgba(0, 0, 0, 0.06);
   overflow: hidden;
   display: flex;
   flex-direction: column;
