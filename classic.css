@@ -1633,33 +1633,53 @@ body {
     gap: 1.2rem;
   }
 
-  /* Redefine clipboard-container to upright Portrait layout on mobile */
+  /* Redefine clipboard-container as a clean, centered white paint box on mobile */
   .clipboard-container {
     grid-area: canvas;
-    height: 43vh; /* Fits viewport heights comfortably without overflow */
-    max-height: 43vh;
-    aspect-ratio: 3.3 / 4; /* Standard portrait ratio */
+    height: 42vh; /* Fits viewport heights comfortably without overflow */
+    max-height: 42vh;
+    aspect-ratio: 4 / 5; /* Standard vertical paint box aspect ratio */
     width: auto;
-    max-width: 100%;
+    max-width: 90vw;
     margin-top: 0;
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    background: #ffffff;
+    border: 2px solid rgba(0, 0, 0, 0.08);
+    border-radius: 8px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+    overflow: hidden;
   }
 
+  /* Hide the vertical wood clipboard base graphic entirely on mobile */
   .clipboard-base {
-    position: relative;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    transform: none; /* Reset rotation */
-    object-fit: fill;
+    display: none;
   }
 
+  /* Canvas paper fills the clean white paint box completely */
   .canvas-paper {
     position: absolute;
-    top: 7.2%;
-    bottom: 8.5%;
-    left: 14%; /* Standard portrait sheet margins */
-    right: 14%;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-radius: 8px;
+    box-shadow: none;
+  }
+
+  /* Scale tool tray items in-place (no vertical translateY shift) */
+  .tool-container.selected {
+    transform: translateY(0) scale(1.15) rotate(0deg) !important;
+  }
+
+  .tool-container:hover {
+    transform: none !important;
+  }
+
+  /* Scale quick colors swatches in-place (no vertical translateY shift) */
+  .paint-tube-swatch.active {
+    transform: translateY(0) scale(1.18) !important;
+  }
+
+  .paint-tube-swatch:hover {
+    transform: none !important;
   }
 }
