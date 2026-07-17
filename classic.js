@@ -2,9 +2,7 @@ import { gsap } from 'gsap';
 
 // DOM Elements
 const body = document.body;
-const menuTrigger = document.getElementById('gallery-menu-trigger');
-const fullMenu = document.getElementById('gallery-full-menu');
-const closeMenuBtn = document.getElementById('close-gallery-menu');
+
 
 const canvas = document.getElementById('paint-canvas');
 const undoBtn = document.getElementById('undo-btn');
@@ -31,27 +29,7 @@ let activeSize = 8;
 const undoHistory = [];
 const maxHistory = 30;
 
-// --- 1. Fullscreen Menu Logic ---
-if (menuTrigger && closeMenuBtn && fullMenu) {
-  menuTrigger.addEventListener('click', () => {
-    fullMenu.classList.add('active');
-    gsap.fromTo('.menu-link', 
-      { opacity: 0, y: 30 },
-      { opacity: 1, y: 0, duration: 0.5, stagger: 0.1, ease: 'power2.out', delay: 0.2 }
-    );
-  });
 
-  closeMenuBtn.addEventListener('click', () => {
-    fullMenu.classList.remove('active');
-  });
-
-  const menuLinks = document.querySelectorAll('.menu-link');
-  menuLinks.forEach(link => {
-    link.addEventListener('click', () => {
-      fullMenu.classList.remove('active');
-    });
-  });
-}
 
 // --- 2. Initialize Canvas & Drawing Settings ---
 let ctx = null;

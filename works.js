@@ -18,9 +18,6 @@ const modalBackdrop = document.querySelector('.modal-backdrop');
 const flipCardElement = document.getElementById('modal-flip-card-element');
 const flipCardInner = flipCardElement.querySelector('.flip-card-inner');
 
-const menuTrigger = document.getElementById('gallery-menu-trigger');
-const fullMenu = document.getElementById('gallery-full-menu');
-const closeMenuBtn = document.getElementById('close-gallery-menu');
 
 // State
 let currentArtworkIndex = 0;
@@ -242,27 +239,11 @@ function navigateModal(direction) {
   });
 }
 
-// 5. Fullscreen Menu Overlay Logic
-function openMenu() {
-  fullMenu.classList.add('active');
-  gsap.fromTo('.menu-link', 
-    { opacity: 0, y: 30 },
-    { opacity: 1, y: 0, duration: 0.5, stagger: 0.1, ease: 'power2.out', delay: 0.2 }
-  );
-}
-
-function closeMenu() {
-  fullMenu.classList.remove('active');
-}
-
-// Event Listeners
+// Event Listeners for Modal
 closeModalBtn.addEventListener('click', closeArtworkModal);
 modalBackdrop.addEventListener('click', closeArtworkModal);
 prevBtn.addEventListener('click', () => navigateModal(-1));
 nextBtn.addEventListener('click', () => navigateModal(1));
-
-menuTrigger.addEventListener('click', openMenu);
-closeMenuBtn.addEventListener('click', closeMenu);
 
 // Keyboard Listeners
 window.addEventListener('keydown', (e) => {
