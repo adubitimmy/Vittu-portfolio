@@ -44,21 +44,10 @@
       <!-- Studio Workspace Section -->
       <section class="studio-workspace">
         
-        <!-- Canvas Toolbar (Sits directly above the clipboard) -->
-        <div class="canvas-control-bar">
-          <div class="canvas-controls-left">
-            <button class="ctrl-btn" id="undo-btn" title="Undo Last Stroke">Undo</button>
-            <button class="ctrl-btn" id="clear-btn" title="Clear Painting">Clear</button>
-          </div>
-          <div class="canvas-controls-right">
-            <!-- Dynamic Brush Size control slider -->
-            <div class="brush-size-control">
-              <label for="brush-size">Size</label>
-              <input type="range" id="brush-size" min="2" max="50" value="8" step="1">
-              <span id="brush-size-val" class="brush-size-val">8px</span>
-            </div>
-            <button class="ctrl-btn highlight-ctrl-btn" id="save-btn" title="Save Artwork as PNG">Save Painting</button>
-          </div>
+        <!-- Action Buttons (Left) -->
+        <div class="canvas-controls-left">
+          <button class="ctrl-btn" id="undo-btn" title="Undo Last Stroke">Undo</button>
+          <button class="ctrl-btn" id="clear-btn" title="Clear Painting">Clear</button>
         </div>
 
         <!-- Centerpiece: Large Clipboard and Interactive Drawing Canvas -->
@@ -71,6 +60,17 @@
             <canvas id="paint-canvas"></canvas>
             <div class="canvas-instructions">Click & drag to paint</div>
           </div>
+        </div>
+
+        <!-- Brush Settings & Save (Right) -->
+        <div class="canvas-controls-right">
+          <!-- Dynamic Brush Size control slider -->
+          <div class="brush-size-control">
+            <label for="brush-size">Size</label>
+            <input type="range" id="brush-size" min="2" max="50" value="8" step="1">
+            <span id="brush-size-val" class="brush-size-val">8px</span>
+          </div>
+          <button class="ctrl-btn highlight-ctrl-btn" id="save-btn" title="Save Artwork as PNG">Save Painting</button>
         </div>
 
       </section>

@@ -525,44 +525,41 @@ body {
   right: 20%;
 }
 
-/* Studio Workspace */
+/* Studio Workspace (CSS Grid Layout) */
 .studio-workspace {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
+  display: grid;
+  grid-template-areas: 
+    "left-ctrl right-ctrl"
+    "canvas canvas";
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto;
+  justify-content: stretch;
+  align-content: center;
+  width: 800px; /* Matches landscape clipboard width */
+  max-width: 90vw;
+  margin: 0 auto;
   height: calc(100vh - 140px); /* Leave room for bottom tray */
-  padding: 80px 2rem 20px 2rem;
+  padding: 80px 0 20px 0;
   position: relative;
   z-index: 5;
   overflow: hidden;
 }
 
-/* Canvas Control Bar (Decoupled, transparent wrapper) */
-.canvas-control-bar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 800px;
-  max-width: 90vw;
-  background: transparent; /* No shared background container */
-  backdrop-filter: none;
-  box-shadow: none;
-  border: none;
-  padding: 0.75rem 0;
-  z-index: 10;
-}
-
+/* Decoupled Left & Right controls */
 .canvas-controls-left {
+  grid-area: left-ctrl;
   display: flex;
-  gap: 1rem; /* Spaced out independent buttons */
+  gap: 1rem;
+  justify-content: flex-start;
+  align-items: center;
 }
 
 .canvas-controls-right {
+  grid-area: right-ctrl;
   display: flex;
-  align-items: center;
   gap: 1.5rem;
+  justify-content: flex-end;
+  align-items: center;
 }
 
 .ctrl-btn {
@@ -642,18 +639,17 @@ body {
   font-weight: 700;
 }
 
-/* Clipboard Container (Centerpiece - Landscape Orientation constrained by screen height) */
+/* Clipboard Container (Centerpiece - Landscape Orientation) */
 .clipboard-container {
+  grid-area: canvas;
+  justify-self: center;
   position: relative;
   height: 52vh; /* Constrain vertical height for perfect screen fit */
   max-height: 52vh;
   aspect-ratio: 4 / 3; /* Landscape drawing board */
   width: auto;
-  max-width: 90vw;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background: transparent;
+  max-width: 100%;
+  margin-top: 0.75rem;
 }
 
 .clipboard-base {
@@ -1556,34 +1552,114 @@ body {
 }
 
 @media (max-width: 768px) {
+  /* Horizontal scrollable tools tray */
   .tool-tray {
-    position: relative;
-    height: auto;
-    flex-wrap: wrap;
-    padding: 2rem 1rem;
-    gap: 2rem;
-    justify-content: space-around;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 120px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap; /* No wrapping, keep items horizontal */
+    overflow-x: auto; /* Enable left/right scrolling */
+    scrollbar-width: none; /* Hide scrollbars for Firefox */
+    padding: 0 1.5rem;
+    gap: 2.5rem;
+    align-items: center;
+    justify-content: flex-start;
+    background: linear-gradient(to top, #ece7dd 0%, #f5f1ea 100%);
+    border-top: 2px solid #d4cca7;
   }
+
+  .tool-tray::-webkit-scrollbar {
+    display: none; /* Hide scrollbars for Chrome/Safari/Edge */
+  }
+
   .tray-section {
-    border-right: none;
-    padding-right: 0;
-    width: 45%;
-    justify-content: center;
-    border-bottom: 1px dashed rgba(140, 127, 102, 0.2);
-    padding-bottom: 2rem;
-  }
-  .tray-section:last-child {
+    border-right: 1px dashed rgba(140, 127, 102, 0.25);
     border-bottom: none;
     padding-bottom: 0;
-    width: 100%;
+    padding-right: 2.5rem;
+    height: 100%;
+    flex-shrink: 0; /* Keep items at their natural dimensions */
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    position: relative;
   }
+
+  .tray-section:last-child {
+    border-right: none;
+    padding-right: 0;
+  }
+
+  .tray-section-title {
+    position: absolute;
+    top: 10px;
+    left: 0;
+    transform: none;
+  }
+
+  /* Split layout controls & Portrait canvas on mobile */
   .studio-workspace {
-    padding-bottom: 40px;
-  }
-  .canvas-control-bar {
+    display: grid;
+    grid-template-areas: 
+      "left-ctrl"
+      "canvas"
+      "right-ctrl";
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr auto;
     width: 100%;
+    max-width: 100%;
+    height: calc(100vh - 120px); /* Fill screen space above tooltray */
+    padding: 75px 1rem 15px 1rem;
+    gap: 0.75rem;
+    justify-items: center;
+    align-content: stretch;
   }
+
+  .canvas-controls-left {
+    grid-area: left-ctrl;
+    justify-content: center;
+    width: 100%;
+    gap: 1rem;
+  }
+
+  .canvas-controls-right {
+    grid-area: right-ctrl;
+    justify-content: center;
+    width: 100%;
+    gap: 1.2rem;
+  }
+
+  /* Redefine clipboard-container to upright Portrait layout on mobile */
   .clipboard-container {
+    grid-area: canvas;
+    height: 43vh; /* Fits viewport heights comfortably without overflow */
+    max-height: 43vh;
+    aspect-ratio: 3.3 / 4; /* Standard portrait ratio */
+    width: auto;
+    max-width: 100%;
+    margin-top: 0;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+  }
+
+  .clipboard-base {
+    position: relative;
+    top: 0;
+    left: 0;
     width: 100%;
+    height: 100%;
+    transform: none; /* Reset rotation */
+    object-fit: fill;
+  }
+
+  .canvas-paper {
+    position: absolute;
+    top: 7.2%;
+    bottom: 8.5%;
+    left: 14%; /* Standard portrait sheet margins */
+    right: 14%;
   }
 }
