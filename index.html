@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Samuel Vittu | Contemporary Painter</title>
+  <meta name="description" content="Official portfolio of Samuel Vittu, a contemporary painter. Explore expressive abstract art, large-scale canvases, and recent exhibitions.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&family=Inter:wght@300;400;600&family=Caveat+Brush&family=Knewave&family=Permanent+Marker&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <!-- Fullscreen Navigation Menu -->
+  <div id="full-menu" class="fullscreen-menu">
+    <button class="close-menu-btn" id="close-menu">&times;</button>
+    <nav class="menu-nav">
+      <a href="#" class="menu-link" data-target="hero">Home</a>
+      <a href="#" class="menu-link" data-target="about">About the Artist</a>
+      <a href="#" class="menu-link" data-target="works">Featured Works</a>
+      <a href="#" class="menu-link" data-target="exhibitions">Exhibitions</a>
+      <a href="#" class="menu-link" data-target="contact">Contact</a>
+    </nav>
+  </div>
+
+  <!-- Main Website Container -->
+  <div class="site-container">
+    
+    <!-- Header -->
+    <header class="main-header">
+      <div class="logo">Samuel Vittu</div>
+      <div class="header-actions">
+        <a href="#works-section" class="btn btn-outline" id="view-works-btn">View works</a>
+        <button class="btn btn-filled" id="open-menu">
+          <span>Menu</span>
+          <span class="menu-icon">
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Shared Background Wrapper for Hero & Info Section Blending -->
+    <div class="hero-info-wrapper">
+
+      <!-- Parallax Hero & Creative Space Section -->
+      <section class="hero-section" id="hero-sec">
+        <!-- Ambient Background Studio Lighting -->
+        <div class="ambient-glow"></div>
+        
+        <!-- Blurred Background Parallax Elements -->
+        <div class="parallax-bg-layer">
+          <img src="/assets/img25.png" class="p-bg-item bg-palette" alt="" style="--depth: 0.1; top: 15%; left: 5%;">
+          <img src="/assets/img12.png" class="p-bg-item bg-brush-1" alt="" style="--depth: 0.15; top: -5%; right: 20%; transform: rotate(45deg);">
+          <img src="/assets/img14.png" class="p-bg-item bg-brush-2" alt="" style="--depth: 0.08; bottom: 30%; left: 15%; transform: rotate(-30deg);">
+          <img src="/assets/img05.png" class="p-bg-item bg-painting" alt="" style="--depth: 0.05; top: 30%; right: 5%; transform: rotate(10deg); opacity: 0.15;">
+        </div>
+
+        <!-- Midground: Large Logo Text & Badges -->
+        <div class="hero-brand-container">
+          <h1 class="hero-title">
+            VITTU
+          </h1>
+          <div class="badge badge-teal" id="badge-painter">Contemporary painter</div>
+          <div class="badge badge-orange" id="badge-samuel">Samuel</div>
+        </div>
+
+        <!-- Floating Foreground Elements (Sharp, Parallax, casting shadows) -->
+        <div class="parallax-fg-layer">
+          <!-- Floating Paint tubes at the top of VITTU -->
+          <img src="/assets/img09.png" class="fg-element float-tube-1" alt="Blue Paint Tube" style="--depth: 0.3; top: 18%; left: 22%;">
+          <img src="/assets/img10.png" class="fg-element float-tube-2" alt="Blue Paint Tube" style="--depth: 0.4; top: 15%; right: 38%;">
+          
+          <!-- Large Left Palette -->
+          <img src="/assets/img28.png" class="fg-element float-palette-left" alt="Artist Palette" style="--depth: 0.35; top: 40%; left: 3%;">
+
+          <!-- Charcoal & brushes right side -->
+          <img src="/assets/img21.png" class="fg-element float-charcoal-right" alt="Charcoal Sticks" style="--depth: 0.45; top: 45%; right: 18%;">
+          <img src="/assets/img29.png" class="fg-element float-brush-right" alt="Paintbrush" style="--depth: 0.38; top: 12%; right: 2%;">
+          
+          <!-- Miscellaneous floating tools -->
+          <img src="/assets/img15.png" class="fg-element float-brush-topleft" alt="Paintbrush" style="--depth: 0.5; top: 10%; left: 5%;">
+          <img src="/assets/img18.png" class="fg-element float-brush-bottomright" alt="Paintbrush" style="--depth: 0.42; bottom: 15%; right: 8%;">
+          <img src="/assets/img13.png" class="fg-element float-charcoal-left" alt="Charcoal Sticks" style="--depth: 0.3; top: 22%; left: -2%;">
+        </div>
+
+        <!-- Centerpiece: Clipboard and Interactive Canvas -->
+        <div class="clipboard-container">
+          <!-- Clipboard Base Image -->
+          <img src="/assets/img08.png" class="clipboard-base" alt="Artist Clipboard">
+          
+          <!-- Interactive Painting Canvas Paper -->
+          <div class="canvas-paper">
+            <canvas id="paint-canvas"></canvas>
+            <div class="canvas-instructions">Click & drag to paint</div>
+            <button class="clear-canvas-btn" id="clear-btn">Clear</button>
+          </div>
+
+          <!-- Hanging paint tube and drip underneath clipboard -->
+          <div class="clipboard-drip-container">
+            <img src="/assets/img03.png" class="fg-element paint-tube-drip" alt="Dripping paint tube" style="--depth: 0.2;">
+          </div>
+        </div>
+
+      </section>
+
+      <!-- Info Column Section -->
+      <section class="info-section">
+        <div class="info-container">
+          
+          <!-- Left Info Block -->
+          <div class="info-block left-block">
+            <h2 class="info-title">Painted hot in the studio</h2>
+            <p class="info-text">
+              Large-scale canvases lock in gesture, scrape, and color before the surface cools into memory.
+            </p>
+          </div>
+
+          <!-- Right Info Block -->
+          <div class="info-block right-block">
+            <h2 class="info-title">Exhibited across Europe</h2>
+            <p class="info-text">
+              Recent works turn interiors into emotional landscapes, balancing rough materiality with poster-bright optimism.
+            </p>
+          </div>
+
+        </div>
+      </section>
+
+    </div>
+
+    <!-- Gallery / Works Section -->
+    <section class="works-section" id="works-section">
+      <div class="works-grid">
+        
+        <!-- Card 1 -->
+        <div class="work-card" data-work-id="mercury-garden">
+          <div class="work-image-container">
+            <img src="/assets/img01.png" alt="Mercury Garden" class="work-image">
+          </div>
+          <div class="work-info">
+            <div class="work-text-group">
+              <h3 class="work-title">Mercury Garden</h3>
+              <p class="work-medium">Oil, sand, and wax</p>
+            </div>
+            <button class="details-btn">Details</button>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="work-card" data-work-id="blue-room">
+          <div class="work-image-container">
+            <img src="/assets/img05.png" alt="Blue Room Memory" class="work-image">
+          </div>
+          <div class="work-info">
+            <div class="work-text-group">
+              <h3 class="work-title">Blue Room Memory</h3>
+              <p class="work-medium">Pigment on linen</p>
+            </div>
+            <button class="details-btn">Details</button>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="work-card" data-work-id="ritual">
+          <div class="work-image-container">
+            <img src="/assets/img02.png" alt="Ritual for Afternoon" class="work-image">
+          </div>
+          <div class="work-info">
+            <div class="work-text-group">
+              <h3 class="work-title">Ritual for Afternoon</h3>
+              <p class="work-medium">Acrylic and charcoal</p>
+            </div>
+            <button class="details-btn">Details</button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+      <p>&copy; 2026 Samuel Vittu. All rights reserved.</p>
+    </footer>
+
+  </div>
+
+  <!-- Artwork Detail Modals -->
+  <div id="artwork-modal" class="modal">
+    <div class="modal-content">
+      <button class="close-modal-btn" id="close-modal">&times;</button>
+      <div class="modal-body">
+        <div class="modal-image-wrapper">
+          <img id="modal-img" src="" alt="">
+        </div>
+        <div class="modal-details">
+          <h2 id="modal-title">Artwork Title</h2>
+          <p class="modal-medium-tag" id="modal-medium">Oil, sand, and wax</p>
+          <div class="modal-description">
+            <p id="modal-desc">Detailed explanation of the work will go here. Each painting represents a specific milestone in the artist's exploration of texture and emotional spaces.</p>
+          </div>
+          <div class="modal-meta-specs">
+            <div class="meta-item">
+              <span class="meta-label">Dimensions</span>
+              <span class="meta-val" id="modal-dims">120 &times; 150 cm</span>
+            </div>
+            <div class="meta-item">
+              <span class="meta-label">Year</span>
+              <span class="meta-val" id="modal-year">2025</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="/main.js"></script>
+</body>
+</html>
