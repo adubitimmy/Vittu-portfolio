@@ -13,6 +13,8 @@
   
   --transition-smooth: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
   --transition-fast: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  
+  --viewport-padding: 4rem;
 }
 
 /* Base Styles */
@@ -41,7 +43,7 @@ body.gallery-theme {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 2rem 4rem 4rem 4rem;
+  padding: 2rem var(--viewport-padding) 4rem var(--viewport-padding);
   position: relative;
 }
 
@@ -78,7 +80,7 @@ body.gallery-theme {
 
 .shelf-label {
   font-family: var(--font-display);
-  font-size: 0.95rem;
+  font-size: 1.25rem; /* Modest bump in size for better hierarchy */
   font-weight: 600;
   letter-spacing: 0.05em;
   text-transform: uppercase;
@@ -87,11 +89,13 @@ body.gallery-theme {
   padding-left: 0.5rem;
 }
 
-/* Horizontal display rows sitting on shelves */
+/* Horizontal display rows sitting on shelves - Full bleed edge-to-edge scrolling */
 .artwork-row {
   display: flex;
   gap: 2.5rem;
-  padding: 2rem 1rem 1rem 1rem;
+  padding: 2rem var(--viewport-padding) 1rem var(--viewport-padding); /* Pushes items to align at start/end */
+  margin-left: calc(-1 * var(--viewport-padding));
+  margin-right: calc(-1 * var(--viewport-padding));
   overflow-x: auto;
   scrollbar-width: none; /* Hide scrollbars for Firefox */
   position: relative;
@@ -107,11 +111,13 @@ body.gallery-theme {
   cursor: grabbing;
 }
 
-/* Physical Ledge (The 3D shelf effect) */
+/* Physical Ledge (The 3D shelf effect) - Full bleed edge-to-edge shadow bar */
 .shelf-ledge {
   height: 16px;
   background: var(--color-shelf-ledge);
-  border-radius: 4px;
+  border-radius: 0; /* Flat edge-to-edge finish */
+  margin-left: calc(-1 * var(--viewport-padding));
+  margin-right: calc(-1 * var(--viewport-padding));
   box-shadow: 
     0 1px 1px rgba(0,0,0,0.06), 
     0 2px 2px rgba(0,0,0,0.04), 
@@ -728,11 +734,14 @@ body.gallery-theme {
 
 /* Responsive Rules */
 @media (max-width: 1024px) {
+  :root {
+    --viewport-padding: 2rem;
+  }
   .gallery-header {
-    padding: 0 2rem;
+    padding: 0 var(--viewport-padding);
   }
   .gallery-viewport {
-    padding: 2rem;
+    padding: 2rem var(--viewport-padding) 4rem var(--viewport-padding);
   }
   .modal-body-container {
     grid-template-columns: 1fr;
@@ -752,11 +761,21 @@ body.gallery-theme {
 }
 
 @media (max-width: 768px) {
+  :root {
+    --viewport-padding: 1.25rem; /* Matches unified mobile header side padding */
+  }
+  .shelf-label {
+    font-size: 1.05rem; /* Cozy size on mobile */
+    margin-bottom: 1rem;
+  }
   /* Make shelves row swipeable / scrollable on mobile */
   .artwork-row {
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     scrollbar-width: none; /* hide standard scrollbars */
+    padding-left: var(--viewport-padding);
+    padding-right: var(--viewport-padding);
+    padding-top: 1.5rem;
     padding-bottom: 1.5rem; /* space for finger-swipes */
     gap: 1.5rem;
   }
