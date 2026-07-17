@@ -17,7 +17,7 @@
     <nav class="menu-nav">
       <a href="/" class="menu-link">Gallery Home</a>
       <a href="/classic.html" class="menu-link active">Interactive Studio</a>
-      <a href="#" class="menu-link">Exhibitions</a>
+      <a href="/works.html" class="menu-link">Exhibitions</a>
       <a href="#" class="menu-link">Biography</a>
       <a href="#" class="menu-link">Contact</a>
     </nav>
@@ -38,63 +38,115 @@
       </nav>
     </header>
 
-    <!-- Shared Background Wrapper for Hero -->
+    <!-- Background Image and Frost Blur Wrapper -->
     <div class="hero-info-wrapper">
 
-      <!-- Parallax Hero & Creative Space Section -->
-      <section class="hero-section" id="hero-sec">
-        <!-- Ambient Background Studio Lighting -->
-        <div class="ambient-glow"></div>
+      <!-- Studio Workspace Section -->
+      <section class="studio-workspace">
         
-        <!-- Blurred Background Parallax Elements -->
-        <div class="parallax-bg-layer">
-          <img src="/assets/img25.png" class="p-bg-item bg-palette" alt="" style="--depth: 0.1; top: 15%; left: 5%;">
-          <img src="/assets/img12.png" class="p-bg-item bg-brush-1" alt="" style="--depth: 0.15; top: -5%; right: 20%; transform: rotate(45deg);">
-          <img src="/assets/img14.png" class="p-bg-item bg-brush-2" alt="" style="--depth: 0.08; bottom: 30%; left: 15%; transform: rotate(-30deg);">
-          <img src="/assets/img05.png" class="p-bg-item bg-painting" alt="" style="--depth: 0.05; top: 30%; right: 5%; transform: rotate(10deg); opacity: 0.15;">
+        <!-- Canvas Toolbar (Sits directly above the clipboard) -->
+        <div class="canvas-control-bar">
+          <div class="canvas-controls-left">
+            <button class="ctrl-btn" id="undo-btn" title="Undo Last Stroke">Undo</button>
+            <button class="ctrl-btn" id="clear-btn" title="Clear Painting">Clear</button>
+          </div>
+          <div class="canvas-controls-right">
+            <!-- Dynamic Brush Size control slider -->
+            <div class="brush-size-control">
+              <label for="brush-size">Size</label>
+              <input type="range" id="brush-size" min="2" max="50" value="8" step="1">
+              <span id="brush-size-val" class="brush-size-val">8px</span>
+            </div>
+            <button class="ctrl-btn highlight-ctrl-btn" id="save-btn" title="Save Artwork as PNG">Save Painting</button>
+          </div>
         </div>
 
-        <!-- Floating Foreground Elements (Sharp, Parallax, casting shadows) -->
-        <div class="parallax-fg-layer">
-          <!-- Floating Paint tubes -->
-          <img src="/assets/img09.png" class="fg-element float-tube-1" alt="Blue Paint Tube" style="--depth: 0.3; top: 18%; left: 22%;">
-          <img src="/assets/img10.png" class="fg-element float-tube-2" alt="Blue Paint Tube" style="--depth: 0.4; top: 15%; right: 38%;">
-          
-          <!-- Large Left Palette -->
-          <img src="/assets/img28.png" class="fg-element float-palette-left" alt="Artist Palette" style="--depth: 0.35; top: 40%; left: 3%;">
-
-          <!-- Charcoal & brushes right side -->
-          <img src="/assets/img21.png" class="fg-element float-charcoal-right" alt="Charcoal Sticks" style="--depth: 0.45; top: 45%; right: 18%;">
-          <img src="/assets/img29.png" class="fg-element float-brush-right" alt="Paintbrush" style="--depth: 0.38; top: 12%; right: 2%;">
-          
-          <!-- Miscellaneous floating tools -->
-          <img src="/assets/img15.png" class="fg-element float-brush-topleft" alt="Paintbrush" style="--depth: 0.5; top: 10%; left: 5%;">
-          <img src="/assets/img18.png" class="fg-element float-brush-bottomright" alt="Paintbrush" style="--depth: 0.42; bottom: 15%; right: 8%;">
-          <img src="/assets/img13.png" class="fg-element float-charcoal-left" alt="Charcoal Sticks" style="--depth: 0.3; top: 22%; left: -2%;">
-        </div>
-
-        <!-- Centerpiece: Clipboard and Interactive Canvas -->
+        <!-- Centerpiece: Large Clipboard and Interactive Drawing Canvas -->
         <div class="clipboard-container">
-          <!-- Clipboard Base Image -->
-          <img src="/assets/img08.png" class="clipboard-base" alt="Artist Clipboard">
+          <!-- Clipboard Base wood structure -->
+          <img src="/assets/img08.png" class="clipboard-base" alt="Artist Drawing Board">
           
-          <!-- Interactive Painting Canvas Paper -->
+          <!-- Drawing Paper sheet on clipboard -->
           <div class="canvas-paper">
             <canvas id="paint-canvas"></canvas>
             <div class="canvas-instructions">Click & drag to paint</div>
-            <button class="clear-canvas-btn" id="clear-btn">Clear</button>
-          </div>
-
-          <!-- Hanging paint tube and drip underneath clipboard -->
-          <div class="clipboard-drip-container">
-            <img src="/assets/img03.png" class="fg-element paint-tube-drip" alt="Dripping paint tube" style="--depth: 0.2;">
           </div>
         </div>
 
       </section>
 
-    </div>
+      <!-- Bottom Tool Workbench Tray (Grouping clickable brushes and colors) -->
+      <div class="tool-tray">
+        
+        <!-- Section 1: Clicking select drawing tools -->
+        <div class="tray-section">
+          <span class="tray-section-title">Brushes</span>
+          
+          <!-- Round Brush (smooth lines) -->
+          <div class="tool-container selected" id="tool-round-brush" data-tool="round" title="Round Paintbrush: Smooth, variable-weight strokes">
+            <img src="/assets/img29.png" class="tool-img round-brush-tool" alt="Round Brush">
+            <div class="selected-indicator"></div>
+          </div>
+          
+          <!-- Flat Ribbon Brush (dynamic angled strokes) -->
+          <div class="tool-container" id="tool-flat-brush" data-tool="flat" title="Flat Brush: Broad ribbon-like flat strokes">
+            <img src="/assets/img18.png" class="tool-img flat-brush-tool" alt="Flat Brush">
+            <div class="selected-indicator"></div>
+          </div>
+          
+          <!-- Charcoal Carbon stick (grainy textured strokes) -->
+          <div class="tool-container" id="tool-charcoal" data-tool="charcoal" title="Charcoal Stick: Textured, grainy carbon strokes">
+            <img src="/assets/img21.png" class="tool-img charcoal-tool" alt="Charcoal Stick">
+            <div class="selected-indicator"></div>
+          </div>
+        </div>
 
+        <!-- Section 2: Paint tubes as quick swatches -->
+        <div class="tray-section">
+          <span class="tray-section-title">Quick Colors</span>
+          <div class="tube-swatch-container">
+            <div class="paint-tube-swatch tube-blue active" data-color="#1d4ed8" title="Ultramarine Blue">
+              <img src="/assets/img09.png" alt="Blue paint tube">
+            </div>
+            <div class="paint-tube-swatch tube-red" data-color="#ff3c4d" title="Cadmium Red">
+              <img src="/assets/img09.png" alt="Red paint tube">
+            </div>
+            <div class="paint-tube-swatch tube-yellow" data-color="#fbbf24" title="Chrome Yellow">
+              <img src="/assets/img09.png" alt="Yellow paint tube">
+            </div>
+            <div class="paint-tube-swatch tube-green" data-color="#059669" title="Cobalt Green">
+              <img src="/assets/img09.png" alt="Green paint tube">
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 3: Interactive Color Palette picker and Custom Pot -->
+        <div class="tray-section">
+          <span class="tray-section-title">Color Palette</span>
+          
+          <div class="palette-picker-container" id="palette-picker">
+            <img src="/assets/img28.png" class="palette-picker-img" alt="Wooden Color Palette">
+            <!-- Interactive hotspots corresponding to blobs of paints on the image -->
+            <div class="blob-hotspot" style="top: 30%; left: 32%; background: #ff3c4d;" data-color="#ff3c4d" title="Cadmium Red"></div>
+            <div class="blob-hotspot" style="top: 24%; left: 52%; background: #fbbf24;" data-color="#fbbf24" title="Chrome Yellow"></div>
+            <div class="blob-hotspot" style="top: 40%; left: 68%; background: #059669;" data-color="#059669" title="Cobalt Green"></div>
+            <div class="blob-hotspot" style="top: 60%; left: 62%; background: #1d4ed8;" data-color="#1d4ed8" title="Ultramarine Blue"></div>
+            <div class="blob-hotspot" style="top: 74%; left: 42%; background: #ffffff;" data-color="#ffffff" title="Titanium White"></div>
+            <div class="blob-hotspot" style="top: 62%; left: 24%; background: #111827;" data-color="#111827" title="Lamp Black"></div>
+          </div>
+
+          <!-- Native color input styled as metal tint paint pot -->
+          <div class="custom-color-pot">
+            <div class="native-picker-wrapper">
+              <input type="color" id="custom-color-picker" value="#1d4ed8" title="Custom color picker">
+            </div>
+            <span class="color-pot-label">Custom</span>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
 
   </div>
 
