@@ -150,7 +150,7 @@ body.gallery-theme {
   background: rgba(0, 0, 0, 0.03); /* dark inset line on top of ledge */
 }
 
-/* Artwork Card Container */
+/* Artwork Card Container - Leaning resting 3D shelf pose */
 .artwork-card {
   width: 230px;
   height: 290px;
@@ -158,13 +158,9 @@ body.gallery-theme {
   cursor: pointer;
   background: transparent;
   flex-shrink: 0;
-  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  transform: perspective(1000px) rotateX(4deg) rotateY(-2deg) translateY(0);
+  transition: transform 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Springy bounce overshoot */
   scroll-snap-align: start;
-}
-
-.artwork-card:hover {
-  transform: translateY(-16px);
-  animation-play-state: paused;
 }
 
 /* Card inner element carrying gold frame & canvas details */
@@ -181,9 +177,10 @@ body.gallery-theme {
     #fbf5b7 75%, 
     #aa771c 100%
   ) 12;
+  /* Contact shadow cast left/bottom-left (light from right) */
   box-shadow: 
-    0 12px 24px rgba(0, 0, 0, 0.12),
-    0 4px 8px rgba(0, 0, 0, 0.08),
+    -4px 8px 12px rgba(0, 0, 0, 0.16),
+    0 2px 4px rgba(0, 0, 0, 0.08),
     inset 0 0 10px rgba(0,0,0,0.6);
   display: flex;
   flex-direction: column;
@@ -191,10 +188,18 @@ body.gallery-theme {
   transition: box-shadow 0.4s ease;
 }
 
-.artwork-card:hover .artwork-card-inner {
-  box-shadow: 
-    0 28px 45px rgba(0, 0, 0, 0.25),
-    0 12px 22px rgba(0, 0, 0, 0.15);
+/* Floating elevated hover state (straightens, lifts, shadow grows) */
+@media (hover: hover) {
+  .artwork-card:hover {
+    transform: perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(-18px) scale(1.02);
+    animation-play-state: paused;
+  }
+  .artwork-card:hover .artwork-card-inner {
+    box-shadow: 
+      -18px 30px 42px rgba(0, 0, 0, 0.28),
+      0 4px 8px rgba(0, 0, 0, 0.08),
+      inset 0 0 10px rgba(0,0,0,0.6);
+  }
 }
 
 /* Image box inside card simulating canvas in frame */
@@ -937,35 +942,40 @@ body.gallery-theme {
   padding-bottom: 6rem;
 }
 
+/* Grid Card - Leaning resting 3D shelf pose */
 .grid-card {
   position: relative;
   cursor: pointer;
   background: transparent;
   width: 100%;
   aspect-ratio: 4/5;
-  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-}
-
-.grid-card:hover {
-  transform: translateY(-16px);
+  transform: perspective(1000px) rotateX(4deg) rotateY(-2deg) translateY(0);
+  transition: transform 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Springy bounce overshoot */
 }
 
 .grid-card-inner {
   width: 100%;
   height: 100%;
   background: #eaeaea;
+  /* Contact shadow cast left/bottom-left (light from right) */
   box-shadow: 
-    0 10px 22px rgba(0, 0, 0, 0.08),
-    0 3px 6px rgba(0, 0, 0, 0.04);
+    -4px 8px 12px rgba(0, 0, 0, 0.12),
+    0 2px 4px rgba(0, 0, 0, 0.06);
   overflow: hidden;
   position: relative;
   transition: box-shadow 0.4s ease;
 }
 
-.grid-card:hover .grid-card-inner {
-  box-shadow: 
-    0 26px 45px rgba(0, 0, 0, 0.22),
-    0 10px 20px rgba(0, 0, 0, 0.12);
+/* Floating elevated hover state (straightens, lifts, shadow grows) */
+@media (hover: hover) {
+  .grid-card:hover {
+    transform: perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(-18px) scale(1.02);
+  }
+  .grid-card:hover .grid-card-inner {
+    box-shadow: 
+      -18px 30px 40px rgba(0, 0, 0, 0.24),
+      0 4px 8px rgba(0, 0, 0, 0.06);
+  }
 }
 
 .grid-card-inner img {
