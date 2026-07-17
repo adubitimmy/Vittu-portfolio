@@ -1543,49 +1543,42 @@ body {
 
   /* Split layout controls & Portrait canvas on mobile */
   .studio-workspace {
-    display: grid;
-    grid-template-areas: 
-      "left-ctrl"
-      "canvas"
-      "right-ctrl";
-    grid-template-columns: 1fr;
-    grid-template-rows: auto 1fr auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     width: 100%;
     max-width: 100%;
     height: calc(100vh - 120px); /* Fill screen space above tooltray */
-    padding: 75px 1rem 15px 1rem;
-    gap: 0.75rem;
-    justify-items: center;
-    align-content: stretch;
+    padding: 80px 16px 16px 16px; /* 16px padding on sides and bottom */
+    overflow: hidden;
   }
 
   .canvas-controls-left {
-    grid-area: left-ctrl;
+    display: flex;
     justify-content: center;
     width: 100%;
     gap: 1rem;
   }
 
   .canvas-controls-right {
-    grid-area: right-ctrl;
+    display: flex;
     justify-content: center;
     width: 100%;
     gap: 1.2rem;
   }
 
-  /* Redefine clipboard-container as a clean, centered white paint box on mobile */
+  /* Redefine clipboard-container as a clean white paint box filling all available vertical space */
   .clipboard-container {
-    grid-area: canvas;
-    height: 42vh; /* Fits viewport heights comfortably without overflow */
-    max-height: 42vh;
-    aspect-ratio: 4 / 5; /* Standard vertical paint box aspect ratio */
-    width: auto;
-    max-width: 90vw;
-    margin-top: 0;
+    flex: 1 1 0%; /* Grow to occupy all remaining height */
+    width: 100%; /* Stretches to calc(100vw - 32px) from padding */
+    height: auto;
+    max-height: none;
+    aspect-ratio: auto; /* Remove aspect ratio constraint to maximize area */
+    margin: 16px 0; /* 16px gap below top controls and above bottom controls */
     background: #ffffff;
     border: 2px solid rgba(0, 0, 0, 0.08);
     border-radius: 8px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
     overflow: hidden;
   }
 
