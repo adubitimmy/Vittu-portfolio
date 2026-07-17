@@ -1048,67 +1048,7 @@ body {
   margin-top: 0.2rem;
 }
 
-/* Media Queries for Responsiveness */
-@media (max-width: 1024px) {
-  .main-header {
-    padding: 0 2rem;
-  }
-  .works-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  .info-container {
-    gap: 4rem;
-  }
-  .modal-body {
-    grid-template-columns: 1fr;
-  }
-  .modal-image-wrapper {
-    padding: 1.5rem;
-  }
-  .modal-details {
-    padding: 2rem;
-  }
-}
 
-@media (max-width: 768px) {
-  .hero-section {
-    height: 100vh;
-    min-height: 700px;
-  }
-  .hero-title {
-    font-size: 18vw;
-  }
-  .clipboard-container {
-    width: 380px;
-    transform: translate(-50%, -15%);
-  }
-  .clipboard-drip-container {
-    bottom: -130px;
-    width: 120px;
-  }
-  .info-container {
-    grid-template-columns: 1fr;
-    gap: 3rem;
-  }
-  .works-grid {
-    grid-template-columns: 1fr;
-  }
-  .left-block, .right-block {
-    text-align: left;
-  }
-  #badge-painter {
-    left: 10%;
-  }
-  #badge-samuel {
-    right: 15%;
-  }
-  .float-palette-left {
-    width: 200px;
-  }
-  .float-brush-right {
-    width: 150px;
-  }
-}
 
 /* ==========================================================================
    Matched Gallery Navigation Header Styles (Light Theme Overrides)
