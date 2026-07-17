@@ -1197,6 +1197,17 @@ body {
   .nav-link-btn.highlight-link {
     display: none; /* Hide Virtual Gallery button from mobile header */
   }
+  /* Center and scale mobile fullscreen navigation links */
+  .menu-link {
+    font-size: 1.8rem !important; /* Fits 'Interactive Studio' on a single line */
+    text-align: center;
+    width: 100%;
+  }
+  .menu-nav {
+    gap: 1.5rem !important;
+    align-items: center;
+    width: 100%;
+  }
 }
 
 /* ==========================================================================
